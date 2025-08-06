@@ -15,7 +15,7 @@ From: almalinux:9
 	NOW=`date`
 	echo "export NOW=\"${NOW}\"" >> $APPTAINER_ENVIRONMENT
 	
-	rm /dnf.sh /root.sh /hcana.sh /ladlib.sh
+	rm /dnf.sh /root.sh /hcana.sh /ladlib.sh /packages
 
 %environment
 	export ROOTSYS=/opt/root
