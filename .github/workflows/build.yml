@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - uses: eWaterCycle/setup-apptainer@3f706d8
+      - uses: eWaterCycle/setup-apptainer@3f706d898c9db585b1d741b4692e66755f3a1b40
         with:
           apptainer-version: 1.4.1
 
