@@ -17,6 +17,4 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=/opt/hcana ..
 make -j5 install
 
-cd /opt/hcana-src
-rm -rf .git*
 

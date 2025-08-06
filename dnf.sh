@@ -1,3 +1,4 @@
+dnf update -y 
 dnf install -y 'dnf-command(config-manager)'
 dnf config-manager --set-enabled crb
 dnf install -y \

@@ -14,4 +14,3 @@ cmake -B build -S . -DCMAKE_INSTALL_PREFIX=/opt/LADlib
 cmake --build build -j4
 cmake --install build
 
-rm -rf .git*

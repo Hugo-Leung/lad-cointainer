@@ -2,17 +2,16 @@ Bootstrap: docker
 From: almalinux:9 
 
 %files 
-	./yum.sh /yum.sh
+	./dnf.sh /dnf.sh
 	./packages /packages
 	./root.sh /root.sh
 	./hcana.sh /hcana.sh
 	./ladlib.sh /ladlib.sh
 %post
-	dnf update -y 
-	sh /yum.sh
-	sh /root.sh
-	sh /hcana.sh
-	sh /ladlib.sh
+	bash /dnf.sh
+	bash /root.sh
+	bash /hcana.sh
+	bash /ladlib.sh
 	NOW=`date`
 	echo "export NOW=\"${NOW}\"" >> $APPTAINER_ENVIRONMENT
 
