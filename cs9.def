@@ -1,0 +1,27 @@
+Bootstrap: docker
+From: almalinux:9 
+
+%files 
+	./yum.sh /yum.sh
+	./packages /packages
+	./root.sh /root.sh
+	./hcana.sh /hcana.sh
+	./ladlib.sh /ladlib.sh
+%post
+	dnf update -y 
+	sh /yum.sh
+	sh /root.sh
+	sh /hcana.sh
+	sh /ladlib.sh
+	NOW=`date`
+	echo "export NOW=\"${NOW}\"" >> $APPTAINER_ENVIRONMENT
+
+%environment
+	export ROOTSYS=/opt/root
+	export PATH=$ROOTSYS/bin:$PATH
+	export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
+	export CLING_STANDARD_PCH=none
+
+	export PATH=/opt/hcana/bin:$PATH
+	export LD_LIBRARY_PATH=/opt/hcana/lib64:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=${HOME}/hallc/software/LADlib/lib64:$LD_LIBRARY_PATH
