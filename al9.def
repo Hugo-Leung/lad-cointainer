@@ -24,3 +24,5 @@ From: almalinux:9
 	export CLING_STANDARD_PCH=none
 
 	export PATH=/opt/hcana/bin:$PATH
+%runscript
+	hcana "$@"
