@@ -10,8 +10,7 @@ git clone --depth=1  --branch develop https://github.com/JeffersonLab/hcana.git 
 cd hcana-src
 git submodule init
 git submodule update --depth=1
-pwd 
-ls
+
 source ./setup.sh
 mkdir build
 cd build
