@@ -21,3 +21,6 @@ cmake -B build -S . -DCMAKE_INSTALL_PREFIX=/opt/LADlib
 cmake --build build -j${njobs}
 cmake --install build
 
+echo /opt/LADlib/lib64 >> /etc/ld.so.conf
+ldconfig
+

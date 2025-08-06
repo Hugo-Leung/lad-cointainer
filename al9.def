@@ -24,5 +24,3 @@ From: almalinux:9
 	export CLING_STANDARD_PCH=none
 
 	export PATH=/opt/hcana/bin:$PATH
-	export LD_LIBRARY_PATH=/opt/hcana/lib64:$LD_LIBRARY_PATH
-	export LD_LIBRARY_PATH=/opt/LADlib/lib64:$LD_LIBRARY_PATH

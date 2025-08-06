@@ -23,3 +23,5 @@ cmake -DCMAKE_INSTALL_PREFIX=/opt/hcana ..
 make -j${njobs} install
 
 
+echo /opt/hcana/lib64 >> /etc/ld.so.conf
+ldconfig
