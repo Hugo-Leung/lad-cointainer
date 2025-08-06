@@ -6,10 +6,14 @@ Prerequisite
 ------------
 I am using [apptainer](https://apptainer.org). So it have to be installed first 
 
-Building
+Building the image
 ---------
 ```
 apptainer build al9.sif al9.def
+```
+Or just download the prebuild image
+```
+wget https://github.com/Hugo-Leung/lad-container/releases/latest/download/al9.sif
 ```
 
 Using the container
@@ -27,3 +31,4 @@ To excute a command in the container
 ```
 apptainer exec -B /w,/cache al9.sif <command>
 ```
+
