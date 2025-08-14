@@ -1,6 +1,12 @@
 Bootstrap: docker
 From: almalinux:9 
 
+%setup
+mkdir $SINGULARITY_ROOTFS/w
+mkdir $SINGULARITY_ROOTFS/volatile
+mkdir $SINGULARITY_ROOTFS/cache
+
+
 %files 
 	./dnf.sh /dnf.sh
 	./packages /packages
@@ -24,5 +30,6 @@ From: almalinux:9
 	export CLING_STANDARD_PCH=none
 
 	export PATH=/opt/hcana/bin:$PATH
+	export LD_LIBRARY_PATH=/opt/LADlib/lib64/:$LD_LIBRARY_PATH
 %runscript
 	hcana "$@"
