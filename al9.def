@@ -2,9 +2,10 @@ Bootstrap: docker
 From: almalinux:9 
 
 %setup
-mkdir $SINGULARITY_ROOTFS/w
-mkdir $SINGULARITY_ROOTFS/volatile
-mkdir $SINGULARITY_ROOTFS/cache
+mkdir ${APPTAINER_ROOTFS}/w
+mkdir ${APPTAINER_ROOTFS}/volatile
+mkdir ${APPTAINER_ROOTFS}/cache
+wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/source/anchors/JLabCA.crt
 
 
 %files 
@@ -14,6 +15,7 @@ mkdir $SINGULARITY_ROOTFS/cache
 	./hcana.sh /hcana.sh
 	./ladlib.sh /ladlib.sh
 %post
+	update-ca-trust
 	bash /dnf.sh
 	bash /root.sh
 	bash /hcana.sh
