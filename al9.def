@@ -33,5 +33,6 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 
 	export PATH=/opt/hcana/bin:$PATH
 	export LD_LIBRARY_PATH=/opt/LADlib/lib64/:$LD_LIBRARY_PATH
+	export ROOT_INCLUDE_PATH=/opt/LADlib/include:/opt/hcana/include:$ROOT_INCLUDE_PATH
 %runscript
 	hcana "$@"
