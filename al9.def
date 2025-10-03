@@ -5,6 +5,8 @@ From: almalinux:9
 mkdir ${APPTAINER_ROOTFS}/w
 mkdir ${APPTAINER_ROOTFS}/volatile
 mkdir ${APPTAINER_ROOTFS}/cache
+mkdir ${APPTAINER_ROOTFS}/scratch
+mkdir ${APPTAINER_ROOTFS}/cvmfs
 wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/source/anchors/JLabCA.crt
 
 
@@ -15,6 +17,7 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 	./hcana.sh /hcana.sh
 	./ladlib.sh /ladlib.sh
 %post
+	ln -s /w/work /work
 	update-ca-trust
 	bash /dnf.sh
 	bash /root.sh
