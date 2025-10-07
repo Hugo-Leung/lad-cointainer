@@ -32,6 +32,7 @@ jobs:
         run: apptainer build --build-arg DEF_HASH=$(git rev-parse --short "$GITHUB_SHA")" lad-al9.sif al9.def
 
       - name: upload compiled document
+        if: startsWith(github.event.ref, 'refs/tags/') 
         uses: softprops/action-gh-release@v2
         with:
           files: |
