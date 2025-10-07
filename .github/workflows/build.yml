@@ -29,7 +29,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: build the container
-        run: apptainer build --build-arg DEF_HASH=${github.sha} lad-al9.sif al9.def
+        run: apptainer build --build-arg DEF_HASH=${{ github.sha }} lad-al9.sif al9.def
 
       - name: upload compiled document
         if: startsWith(github.event.ref, 'refs/tags/') 
