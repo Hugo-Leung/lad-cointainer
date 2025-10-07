@@ -25,11 +25,11 @@ jobs:
       - uses: actions/checkout@v5
       - uses: eWaterCycle/setup-apptainer@3f706d898c9db585b1d741b4692e66755f3a1b40
         with:
-          apptainer-version: 1.4.2
+          apptainer-version: 1.4.3
 
       # Runs a single command using the runners shell
       - name: build the container
-        run: apptainer build al9.sif al9.def
+        run: apptainer build --build-arg DEF_HASH=$(git rev-parse --short "$GITHUB_SHA")" lad-al9.sif al9.def
 
       - name: upload compiled document
         uses: softprops/action-gh-release@v2

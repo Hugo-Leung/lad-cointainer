@@ -1,6 +1,9 @@
 Bootstrap: docker
 From: almalinux:9 
 
+%arguments
+	DEF_HASH=""
+
 %setup
 mkdir ${APPTAINER_ROOTFS}/w
 mkdir ${APPTAINER_ROOTFS}/volatile
@@ -24,10 +27,11 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 	bash /hcana.sh
 	bash /ladlib.sh
 	NOW=`date`
-	echo "export NOW=\"${NOW}\"" >> $APPTAINER_ENVIRONMENT
 	
 	rm /dnf.sh /root.sh /hcana.sh /ladlib.sh /packages
-
+	echo "LADLIB_HASH $(git -C /opt/LADlib-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
+	echo "HCANA_HASH $(git -C /opt/hcana-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
+	
 %environment
 	export ROOTSYS=/opt/root
 	export PATH=$ROOTSYS/bin:$PATH
@@ -39,3 +43,22 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 	export ROOT_INCLUDE_PATH=/opt/LADlib/include:/opt/hcana/include:$ROOT_INCLUDE_PATH
 %runscript
 	hcana "$@"
+
+%test 
+	hcana -v
+	if [ $? -eq 0 ]; then
+        echo "hcana is running sucessfully."
+    else
+        echo "Build failed."
+        exit 1
+    fi
+	hcana -l -b -q -e "gSystem->Load(\"libLAD\")"
+	if [ $? -eq 0 ]; then
+        echo "LADlib is loaded sucessfully."
+    else
+        echo "Build failed."
+        exit 2
+    fi
+
+%labels
+	DEF_HASH {{ DEF_HASH }}
