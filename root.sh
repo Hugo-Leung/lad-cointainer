@@ -1,6 +1,6 @@
 #! /bin/bash
 cd /opt
-ROOT_BIN=root_v6.36.02.Linux-almalinux9.6-x86_64-gcc11.5.tar.gz
+ROOT_BIN=root_v6.36.04.Linux-almalinux9.6-x86_64-gcc11.5.tar.gz
 curl -O https://root.cern/download/${ROOT_BIN}
 tar -xzf ${ROOT_BIN}
 rm -f ${ROOT_BIN}
