@@ -16,26 +16,24 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 %files 
 	./dnf.sh /dnf.sh
 	./packages /packages
-	./root.sh /root.sh
 	./hcana.sh /hcana.sh
 	./ladlib.sh /ladlib.sh
 %post
 	ln -s /w/work /work
 	update-ca-trust
 	bash /dnf.sh
-	bash /root.sh
 	bash /hcana.sh
 	bash /ladlib.sh
 	NOW=`date`
 	
-	rm /dnf.sh /root.sh /hcana.sh /ladlib.sh /packages
+	rm /dnf.sh  /hcana.sh /ladlib.sh /packages
 	echo "LADLIB_HASH $(git -C /opt/LADlib-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
 	echo "HCANA_HASH $(git -C /opt/hcana-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
 	
 %environment
-	export ROOTSYS=/opt/root
-	export PATH=$ROOTSYS/bin:$PATH
-	export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
+#	export ROOTSYS=/usr
+#	export PATH=$ROOTSYS/bin:$PATH
+#	export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
 	export CLING_STANDARD_PCH=none
 
 	export PATH=/opt/hcana/bin:$PATH
