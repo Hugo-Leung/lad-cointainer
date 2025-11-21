@@ -1,10 +1,6 @@
 #!/bin/bash
 cd /opt
 
-if  [[ -z "$ROOTSYS" ]]; then
-	source /opt/root/bin/thisroot.sh
-fi
-
 git clone --depth=1  --branch develop https://github.com/Hugo-Leung/hcana.git hcana-src
 
 cd hcana-src

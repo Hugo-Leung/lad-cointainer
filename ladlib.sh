@@ -1,10 +1,6 @@
 #!/bin/bash
 cd /opt
 
-if  [[ -z "$ROOTSYS" ]]; then
-	source /opt/root/bin/thisroot.sh
-fi
-
 export PATH=/opt/hcana/bin:$PATH
 export LD_LIBRARY_PATH=/opt/hcana/lib64:$LD_LIBRARY_PATH
 
