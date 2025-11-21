@@ -9,11 +9,11 @@ I am using [apptainer](https://apptainer.org). So it have to be installed first
 Building the image
 ---------
 ```
-apptainer build al9.sif al9.def
+apptainer build lad-al9.sif al9.def
 ```
 Or just download the prebuild image
 ```
-wget https://github.com/Hugo-Leung/lad-container/releases/latest/download/al9.sif
+wget https://github.com/Hugo-Leung/lad-container/releases/latest/download/lad-al9.sif 
 ```
 
 Using the container
@@ -24,11 +24,12 @@ apptainer shell al9.sif
 ```
 on ifarm, you might also want to bind `/w` and `/cache` so we can access those directories for analysis, so you might want to add the following flags
 ```
-apptainer shell -B /w,/cache al9.sif
+apptainer shell -B /w,/cache lad-al9.sif
 ```
 
 To excute a command in the container
 ```
-apptainer exec -B /w,/cache al9.sif <command>
+apptainer exec -B /w,/cache lad-al9.sif <command>
 ```
+
 
