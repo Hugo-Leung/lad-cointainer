@@ -4,7 +4,7 @@ cd /opt
 export PATH=/opt/hcana/bin:$PATH
 export LD_LIBRARY_PATH=/opt/hcana/lib64:$LD_LIBRARY_PATH
 
-git clone --depth=1 https://github.com/Hugo-Leung/LADlib.git LADlib-src
+git clone --depth=1 https://github.com/JeffersonLab/LADlib.git LADlib-src
 cd LADlib-src
 mkdir build 
 

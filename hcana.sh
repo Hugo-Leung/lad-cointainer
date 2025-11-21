@@ -1,7 +1,11 @@
 #!/bin/bash
 cd /opt
 
-git clone --depth=1  --branch develop https://github.com/Hugo-Leung/hcana.git hcana-src
+if  [[ -z "$ROOTSYS" ]]; then
+	source /opt/root/bin/thisroot.sh
+fi
+
+git clone --depth=1  --branch develop https://github.com/JeffersonLab/hcana.git hcana-src
 
 cd hcana-src
 git submodule init
