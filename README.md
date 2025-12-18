@@ -16,6 +16,12 @@ Or just download the prebuild image
 wget https://github.com/Hugo-Leung/lad-container/releases/latest/download/al9.sif
 ```
 
+By default, GEANT4 is not built, but can be eanble by passing
+```
+--build-arg ENABLE_GEANT4=1
+```
+during the build command
+
 Using the container
 --------
 To get a shell

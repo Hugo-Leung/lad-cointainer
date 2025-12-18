@@ -41,6 +41,10 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 	echo "ROOT_VERSION $(root-config --version)" >> $APPTAINER_LABELS
 	
 	rm /clhep.sh /geant4.sh
+	if (( {{  ENABLE_GEANT4 }} )); then
+		echo "GEANT4_VERSION $(geant4-config --version)" >> $APPTAINER_LABELS
+		echo "CLHEP_VERSION $(clhep-config --version)" >> $APPTAINER_LABELS
+	fi
 	
 %environment
 	export PATH=/opt/hcana/bin:$PATH
@@ -52,8 +56,6 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 		export LD_LIBRARY_PATH=/opt/geant4/libi64:$LD_LIBRARY_PATH
 		export ROOT_INCLUDE_PATH=/opt/CLHEP/include:$ROOT_INCLUDE_PATH
 		export GEANT4_DATA_DIR=/opt/geant4/share/Geant4/data
-		echo "GEANT4_VERSION $(geant4-config --version)" >> $APPTAINER_LABELS
-		echo "CLHEP_VERSION $(clhep-config --version)" >> $APPTAINER_LABELS
 	fi
 
 %runscript
