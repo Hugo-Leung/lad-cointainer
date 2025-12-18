@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /opt
 
-git clone --depth=1  --branch develop https://github.com/Hugo-Leung/hcana.git hcana-src
+git clone --depth=1  --branch develop https://github.com/JeffersonLab/hcana.git hcana-src
 
 cd hcana-src
 git submodule init
