@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e 
 cd /opt
 
 export PATH=/opt/hcana/bin:$PATH

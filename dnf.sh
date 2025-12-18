@@ -1,13 +1,10 @@
 #! /bin/bash
-dnf update -y 
-dnf install -y 'dnf-command(config-manager)'
-dnf config-manager --set-enabled crb
-dnf install -y \
-	https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm 
+set -e 
+microdnf update -y 
+microdnf --enablerepo=crb install -y epel-release
+/usr/bin/crb enable
+microdnf --enablerepo=crb install -y $(cat /packages)
 
-dnf group install -y "Development Tools"
-dnf install -y $(cat /packages)
-
-dnf clean all
+microdnf clean all
 
 
