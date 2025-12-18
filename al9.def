@@ -1,8 +1,9 @@
 Bootstrap: docker
-From: almalinux:9 
+From: almalinux:9-minimal 
 
 %arguments
 	DEF_HASH=""
+	ENABLE_GEANT4=0
 
 %setup
 mkdir ${APPTAINER_ROOTFS}/w
@@ -18,23 +19,45 @@ wget https://pki.jlab.org/JLabCA.crt -O  ${APPTAINER_ROOTFS}/etc/pki/ca-trust/so
 	./packages /packages
 	./hcana.sh /hcana.sh
 	./ladlib.sh /ladlib.sh
+	./clhep.sh /clhep.sh
+	./geant4.sh /geant4.sh
 %post
 	ln -s /w/work /work
 	update-ca-trust
 	bash /dnf.sh
 	bash /hcana.sh
 	bash /ladlib.sh
+	
+	if (( {{  ENABLE_GEANT4 }} )); then
+		bash /clhep.sh
+		bash /geant4.sh
+	fi
+	
 	NOW=`date`
 	
-	rm /dnf.sh  /hcana.sh /ladlib.sh /packages
+	rm /dnf.sh  /hcana.sh /ladlib.sh /packages 
 	echo "LADLIB_HASH $(git -C /opt/LADlib-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
 	echo "HCANA_HASH $(git -C /opt/hcana-src rev-parse --short HEAD)" >> $APPTAINER_LABELS
 	echo "ROOT_VERSION $(root-config --version)" >> $APPTAINER_LABELS
+	
+	rm /clhep.sh /geant4.sh
+	if (( {{  ENABLE_GEANT4 }} )); then
+		echo "GEANT4_VERSION $(/opt/geant4/bin/geant4-config --version)" >> $APPTAINER_LABELS
+		echo "CLHEP_VERSION $(/opt/CLHEP/bin/clhep-config --version)" >> $APPTAINER_LABELS
+	fi
 	
 %environment
 	export PATH=/opt/hcana/bin:$PATH
 	export LD_LIBRARY_PATH=/opt/LADlib/lib64/:$LD_LIBRARY_PATH
 	export ROOT_INCLUDE_PATH=/opt/LADlib/include:/opt/hcana/include:$ROOT_INCLUDE_PATH
+	
+	if (( {{  ENABLE_GEANT4 }} )); then
+		export PATH=/opt/CLHEP/bin:/opt/geant4/bin:$PATH
+		export LD_LIBRARY_PATH=/opt/geant4/libi64:$LD_LIBRARY_PATH
+		export ROOT_INCLUDE_PATH=/opt/CLHEP/include:$ROOT_INCLUDE_PATH
+		export GEANT4_DATA_DIR=/opt/geant4/share/Geant4/data
+	fi
+
 %runscript
 	hcana "$@"
 
