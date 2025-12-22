@@ -32,8 +32,6 @@ jobs:
         run: |
           apptainer build --build-arg DEF_HASH=${{ github.sha }} lad-al9.sif al9.def
           apptainer inspect lad-al9.sif
-          apptainer build --build-arg DEF_HASH=${{ github.sha }} --build-arg ENABLE_GEANT4=1 lad-al9-with-Geant4.sif al9.def
-          apptainer inspect lad-al9-with-Geant4.sif
 
       - name: upload compiled image
         if: startsWith(github.event.ref, 'refs/tags/') 
