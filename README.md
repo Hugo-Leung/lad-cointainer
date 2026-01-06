@@ -16,9 +16,9 @@ Or just download the prebuild image
 wget https://github.com/Hugo-Leung/lad-container/releases/latest/download/lad-al9.sif 
 ```
 
-By default, GEANT4 is not built, but can be eanble by passing
+After building the lad-al9 container, we can add GEANT4 to it
 ```
---build-arg ENABLE_GEANT4=1
+apptainer build lad-al9-GEANT4.sif geant4.def
 ```
 during the build command
 
@@ -37,5 +37,6 @@ To excute a command in the container
 ```
 apptainer exec -B /w,/cache lad-al9.sif <command>
 ```
+
 
 
